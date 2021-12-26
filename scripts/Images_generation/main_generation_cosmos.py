@@ -18,6 +18,10 @@ from tools_for_VAE import utils
 
 from images_generator import image_generator, image_generator_real
 
+# <IMAGE_TYPE NAME> <TYPE> <'isolated'/'blended'> <'noshift'/'uniform'/'annulus'/'uniform+betaprime'> <PEAK_DETECTION?> <NO. FILES> <NO. IMAGES PER FILE>
+
+# python main_generation_cosmos.py blah1 training isolated noshift false 10 1000 
+
 # The script is used as, eg,
 # # python main_blended_generation_cosmos.py training 10 1000
 # to produce 10 files in the training sample with 1000 images each.
@@ -32,24 +36,27 @@ N_per_file = 10000
 do_add_shear=True
 assert training_or_test in ['training', 'validation', 'test']
 
+cur_dir = os.path.dirname(os.path.abspath(__file__))
+proj_dir = os.path.dirname(os.path.dirname(cur_dir))
+
 # Method to shift centered galaxy
 if isolated_or_blended == 'isolated':
     # where to save images and data
-    save_dir = '/sps/lsst/users/barcelin/data/isolated_galaxies/' + case + training_or_test
+    save_dir = proj_dir + 'data/isolated_galaxies/' + case + training_or_test
     # what to call those files
     root = 'galaxies_isolated_20191024_'
     nmax_blend = 1
 elif isolated_or_blended == 'blended':
     # where to save images and data
-    save_dir = '/sps/lsst/users/barcelin/data/blended_galaxies/' + case + training_or_test
+    save_dir = proj_dir + 'data/blended_galaxies/' + case + training_or_test
     # what to call those files
     root = 'galaxies_blended_20191024_'
     nmax_blend = 4
 else:
     raise NotImplementedError
 # Loading the COSMOS catalog
-cosmos_cat = galsim.COSMOSCatalog('real_galaxy_catalog_25.2.fits', dir='/sps/lsst/users/barcelin/COSMOS_25.2_training_sample') #dir=os.path.join(galsim.meta_data.share_dir,'COSMOS_25.2_training_sample'))#
-cosmos_cat_dir = '/sps/lsst/users/barcelin/COSMOS_25.2_training_sample'
+cosmos_cat = galsim.COSMOSCatalog('real_galaxy_catalog_25.2.fits', dir=proj_dir + 'COSMOS_25.2_training_sample') #dir=os.path.join(galsim.meta_data.share_dir,'COSMOS_25.2_training_sample'))#
+cosmos_cat_dir = proj_dir + 'COSMOS_25.2_training_sample'
 # Select galaxies to keep for the test sample
 if training_or_test == 'test':
     used_idx = np.arange(5000)

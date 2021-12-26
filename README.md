@@ -5,6 +5,7 @@ This repository hosts the code used in Arcelin, B., Doux, C., Aubourg, E. & Rouc
 This paper presents a method to deblend (i.e. isolate) overlapping galaxies in multiband astronomical survey images. The focus is on the LSST weak lensing survey and potential improvements from including images from ESA's Euclid satellite.
 
 In brief, the method uses two networks:
+
 - a variational autoencoder (Kingma 2014, https://arxiv.org/abs/1312.6114) to denoise isolated galaxy images.
 - and another network, which has the same architecture as the VAE, to deblend the galaxies. In this network, only the encoder is trained, since the decoder is fixed: weights are fixed from those of the VAE's decoder.
 
@@ -15,12 +16,16 @@ The images are generated with GalSim (https://github.com/GalSim-developers/GalSi
 The list of released versions of this package can be found [here](https://github.com/LSSTDESC/DeblenderVAE/releases), with the master branch including the most recent (non-released) development.
 
 ## Installation
+
 1. Clone the repository
+
 ```
 git clone https://github.com/LSSTDESC/DeblenderVAE.git
 cd DeblenderVAE
 ```
-2. Install 
+
+2. Install
+
 - with [conda](https://www.anaconda.com/products/individual) or [miniconda](https://docs.conda.io/en/latest/miniconda.html)
   - if you don't want to use GPU
     ```
@@ -33,8 +38,8 @@ cd DeblenderVAE
     conda activate env_vae_tensorflow_gpu
     ```
 
-
 ## Required packages
+
 - scipy
 - numpy
 - jupyter

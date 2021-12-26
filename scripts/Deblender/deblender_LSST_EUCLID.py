@@ -33,6 +33,8 @@ bands = [0,1,2,3,4,5,6,7,8,9]
 steps_per_epoch = 32 
 validation_steps = 8 
 
+# deblender_LSST_EUCLID.py <ADAM LR> <PATH_WEIGHTS/PLOTS NAME> <IMAGES_DIR NAME> <EPOCHS> <"vae"/"deblender"> <PATH_OUTPUT NAME>
+
 load_from_vae_or_deblender = str(sys.argv[5])
 
 images_dir = '/sps/lsst/users/barcelin/data/blended_galaxies/'+str(sys.argv[3])+'validation/'
@@ -48,7 +50,7 @@ x_val = np.load(os.path.join(images_dir, 'galaxies_blended_20191024_0_images.npy
 if load_from_vae_or_deblender == 'vae':
     deblender, deblender_utils, encoder, decoder, Dkl = utils.load_vae_full(path_output_vae, 10, folder=True) 
 elif load_from_vae_or_deblender == 'deblender':
-    deblender, deblender_utils, encoder, decoder, Dkl = utils.load_vae_full(path_output, 10, folder=True) 
+    deblender, deblender_utils, encoder, decoder, Dkl = utils.load_vae_full(path_output, 10, folder=True)
 else:
     raise NotImplementedError
 decoder.trainable = True
