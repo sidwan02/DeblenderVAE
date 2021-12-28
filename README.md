@@ -53,3 +53,9 @@ cd DeblenderVAE
 - seaborn
 - pandas
 - tqdm
+
+
+Steps:
+1. Download the COSMOS real galaxy dataset (see line 64 of main_generation_cosmos.py)
+https://github.com/GalSim-developers/GalSim/wiki/RealGalaxy-Data
+2. 
